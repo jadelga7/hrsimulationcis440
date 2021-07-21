@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mentor: View Questions - Choose a Candidate</title>
+    <meta charset="utf-8">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script src="./mentor.js"></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js">
+        // <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <style>
+       *{
+    margin:0;
+    padding:0;
+}
+
+body{
+    background: rgb(239, 244, 247);
+}
+
+#header{
+    width: 100%;
+    height: 60px;
+    background:rgb(33, 66, 99);
+    position: fixed;
+    top: 0;
+}
+/*主页面按钮*/
+#header .dh_btn{
+    width: 100px;
+    height: 60px;
+    background:rgb(23, 50, 77);
+    float: left;
+    cursor: pointer;
+    line-height: 60px;
+    text-align: center;
+    font-size: 20px;
+}
+
+#header .user_admin_btn{
+    width: calc(100% - 100px);
+    height: 60px;
+    background: rgb(33, 66, 99);
+    float: right;
+    text-align: right;
+    line-height: 60px;
+    font-size: 20px;
+}
+
+.mainContent{
+    position: fixed;
+    width: calc(100% - 60px);
+    margin-top: 60px;
+    color: #333300;
+    z-index: 1;
+    
+}
+
+
+#left_dh{
+    width: 0;
+    height: 100%;
+    background-color:rgb(41, 75, 109);
+    display: block;
+    position: fixed;
+    left: 0;
+    z-index: 9999;
+}
+
+#left_dh button{
+    font-size:3vh;
+}
+
+#black_bg{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: rgb(0, 0, 0);
+    opacity: 0.6;
+    z-index: 999;
+    display: none;
+}
+/*menu页面按键颜色*/
+.menuButton {
+    width: 100%;
+    height: 20%;
+    font-size: 30px;
+    background:rgb(41, 75, 109);
+    color: white;
+    display: inline-block;
+    text-decoration: none;
+    border: none;
+    padding: 20px;
+}
+
+/*按钮变颜色*/
+.menuButton:hover {
+    opacity: 0.8;
+    color:rgb(33, 66, 99);
+    background: white;
+}
+
+.main_left{
+  float: left;
+  margin: 0px;
+  height: 660px;
+  padding: 24px;
+}
+
+.main_left_main{
+  float: left;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+
+}
+
+
+#submit{
+    margin-left: 90%;
+    margin-top: 30%;
+    border-radius: 5px; 
+    color: white; 
+    font-weight: bold; 
+    background: rgb(74, 117, 160); 
+    width: 40%; 
+    height: 5%;
+}
+
+
+
+input{
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 150px;
+    height: 30%;
+    margin-left: 2%;
+    margin-top: 2%;
+    
+
+}
+
+input:hover{
+	transform: scale(1.2);
+    text-transform: uppercase;
+			}
+
+#overlay {
+    background: grey;
+    filter: alpha(opacity=50); /* IE的透明度 */
+    opacity: 0.8; /* 透明度 */
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2; /* 此处的图层要大于页面 */
+    display: none;
+    overflow: hidden;
+}
+
+#resumeReview{
+    position: absolute;
+    overflow: auto;
+    opacity: 1.0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    display: none;
+}
+
+#resumeReviewIMG{
+    width: 50%;
+    height: 100%;
+    margin: auto;
+}
+
+.pick{
+    width: 10px;
+    height: 10px;
+    margin: 0;
+}
+
+label{
+    vertical-align: middle;
+    font-size: small;
+}
+/* .modal-content{
+    z-index: 100;
+    width: 35%;
+    margin-left: 32%;
+    margin-top: 20px;
+    position: absolute;
+    
+} */
+
+#overlay2 {
+    background: rgb(0, 0, 0);
+    opacity: 0.7; /* 透明度 */
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99; 
+    overflow: hidden;
+}
+
+
+    </style>
+</head>
+<body bgcolor="#eee">
+<!-- 头部 -->
+<div id="overlay">
+</div> 
+<div id="resumeReview">      
+    <div id="resumeReviewIMG">
+        <button id="close">Close</button>
+    </div> 
+</div>
+<!-- <div id="overlay2">
+</div>  -->
+<!-- <div class="modal-content" id="popWin">
+    <div class="modal-header">
+        <h4 class="modal-title" style="text-align: center;">Chose the best candidate</h4>
+        <button type="button" class="close" data-dismiss="modal" onclick="close1()">×</button>
+    </div>
+    <div class="modal-body">
+        <center>
+            <p style="font-size: 1em;">The next task your boss gave you is to chose the best candidate out of the seven. Narrow it down to three.
+                Here you can see all of the resumes. <br>Make your choice.</p>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="close1()">Ok</button>
+        </center>
+    </div>
+</div> -->
+<div id="header">
+    <div class="dh_btn" onclick="openLeft_dh()" style="color: white;">Menu</div>
+    <div class="user_admin_btn" style="color: white; text-align: right;">
+      <p style="margin-right: 1%;"> <a id="date"></a></p>
+  </div>
+</div>
+
+<div class="mainContent" id="totalMain">
+  <div class='main_left' style=" width: 34%; border: 0.5px solid #e2e2e2; padding: 2%; overflow: scoll;">
+    <h2>Part 2: Choose a Candidate</h2>
+    <p style="font-size: 2vh">It's important to know how to filter a good candidate from their resume and the overall application process. This is what the application
+        process looks like. Be resonable with what candidates you think will fit the position best.
+    </p>
+    <p style="font-size: 2vh;">
+        <span style="text-decoration: underline;">Directions</span>:
+        By clicking each resume page, you will get a enlarged picture. If you want to go back, click the go close button 
+        above the enlarged resume image. If you want to choose the image, click the radio
+        below it. <strong>You are only allow to choose three out of total.</strong>
+        
+    </p>
+    <hr>
+    <a href="mentorviewAllQuestions.html"><input type='button' style='border-radius: 5px; color: white; font-weight:bold; background: rgb(74, 117, 160); width: 15%; height: 5%;' value='Back'/></a></a>
+    <a href='mentorInterviewQs.html'><input type='button' style='border-radius: 5px; color: white; font-weight:bold; background: rgb(74, 117, 160); width: 35%; height: 5%;' value='Next Question'/></a>
+    <a href='mentor.html'><input type='button' style='border-radius: 5px; color: white; font-weight:bold; background: rgb(74, 117, 160); width: 30%; height: 5%;' value='Main Menu'/></a>
+    <a href='https://us04web.zoom.us/j/79921791955'><input type='button' style='border-radius: 5px; color: white; font-weight:bold; background: rgb(74, 117, 160); width: 35%; height: 5%;' value='Zoom Meeting'/></a>
+    <hr>
+    <h5>Choose three candidate from the seven.</h5>
+            <input type="checkbox" class="pick">
+            <label>Mary Johnson</label>
+            <br>
+            <input type="checkbox" class="pick" >
+            <label>Joe Talla</label>
+            <br>
+            <input type="checkbox" class="pick" >
+            <label>Edward Willets</label>
+            <br>
+            <input type="checkbox" class="pick" >
+            <label>Nancy Yang</label>
+            <br>
+            <input type="checkbox" class="pick" >
+            <label>Bobby Barnacle </label>
+            <br>
+            <input type="checkbox" class="pick" >
+            <label>Jesscia Delgado</label>
+            <br>
+            <input type="checkbox" class="pick" >
+            <label>John Smith </label>
+            <br>
+
+        </div>
+
+  <div class='main_left' style=" width: 60%;  padding-left: 3%;font-size: 3vh;">
+    <h1 style="font-size: 4vh;">Pick Threes Resume From the Seven</h1>
+    <p style="font-size: 3vh; margin-top: 1%;">Your company has received seven resumes from a job position. 
+        Pick three candiate you think most fit the position.
+    </p>
+    <div class='main_left_main'>
+        <br>
+       <input type="button" style="background-image: url(./R1.jpg);" onclick="resume(1)">
+       <input type="button" style="background-image: url(./R22.jpg);" onclick="resume(2)">
+       <input type="button" style="background-image: url(./R3.jpg);" onclick="resume(3)">
+       <input type="button" style="background-image: url(./R4.jpg);" onclick="resume(4)">
+       <input type="button" style="background-image: url(./R5.jpg);" onclick="resume(5)">
+       <input type="button" style="background-image: url(./R6.jpg);" onclick="resume(6)">
+       <input type="button" style="background-image: url(./R7.jpg);" onclick="resume(7)">
+       <br>
+       
+    </div>
+  </div>
+  <div class='main_left' style=" width: 20%;  padding-left: 3%; border-left: 0.5px solid #e6e6e6; padding: 2%;">
+       
+        <p style="margin-top: 30%;">
+            <h5>Choose three candidate from the seven.</h5>
+            <input type="checkbox" class="pick">
+            <label>Mary Johnson</label>
+            <br>
+            <input type="checkbox" class="pick" >
+            <label>Hoe Talla</label>
+            <br>
+            <input type="checkbox" class="pick" >
+            <label>Edward Willets</label>
+            <br>
+            <input type="checkbox" class="pick" >
+            <label>Nancy Yang</label>
+            <br>
+            <input type="checkbox" class="pick" >
+            <label>Bobby Barnacle </label>
+            <br>
+            <input type="checkbox" class="pick" >
+            <label>Jesscia Delgado</label>
+            <br>
+            <input type="checkbox" class="pick" >
+            <label>John Smith </label>
+            <br>
+        </p>
+        <input type="submit" id="submit" onclick="submit()">
+        
+  </div>
+  
+
+</div>
+
+<!-- 左侧导航 -->
+<div id="left_dh"></div>
+
+<!-- 半透明黑色背景 -->
+<div id="black_bg" onclick="closeLeft_dh()"></div>
+
+<script>
+    n =  new Date();
+    y = n.getFullYear();
+    m = n.getMonth() + 1;
+    d = n.getDate();
+    document.getElementById("date").innerHTML = m + "/" + d + "/" + y;
+
+    $("input[type=checkbox]").attr('disabled', true);
+
+    function resume(candiate){
+        var body = document.body,
+            html = document.documentElement;
+        let pageHeight = Math.max( body.scrollHeight, body.offsetHeight, 
+                       html.clientHeight, html.scrollHeight, html.offsetHeight );
+        let pageWidth = Math.max( body.scrollWidth, body.offsetWidth, 
+                       html.clientWidth, html.scrollWidth, html.offsetWidth );
+        $("#overlay").height(pageHeight);
+        $("#overlay").width(pageWidth);
+        // fadeTo第一个参数为速度，第二个为透明度
+        // 多重方式控制透明度，保证兼容性，但也带来修改麻烦的问题
+        $("#overlay").fadeTo(200, 0.5);
+        $("#resumeReview").fadeTo(200, 1);
+        
+        switch(candiate) {
+            case 1:
+                $("#resumeReviewIMG").append("<img src='./R1.jpg' style='width: 100%;'>")
+                break;
+            case 2:
+                $("#resumeReviewIMG").append("<img src='./R22.jpg' style='width: 100%;'><img src='./R2.jpg' style='width: 100%;'>")
+                break;
+            case 3:
+                $("#resumeReviewIMG").append("<img src='./R3.jpg' style='width: 100%;'>")
+                break;
+            case 4:
+                $("#resumeReviewIMG").append("<img src='./R4.jpg' style='width: 100%;'>")
+                break;
+            case 5:
+                $("#resumeReviewIMG").append("<img src='./R5.jpg' style='width: 100%;'>")
+                break;
+            case 6:
+                $("#resumeReviewIMG").append("<img src='./R6.jpg' style='width: 100%;'>")
+                break;
+            case 7:
+                $("#resumeReviewIMG").append("<img src='./R7.jpg' style='width: 100%;'>")
+                break;    
+            }
+
+        $("body").css({"overflow":"hidden"});
+    }
+
+    $("#close").click(function () {
+        $("#overlay").fadeOut(200);
+        $("#resumeReview").fadeOut(200);
+        var numOfChild = document.getElementById("resumeReviewIMG").childElementCount;
+        for (i=1; i<numOfChild; i++){
+             document.getElementById('resumeReviewIMG').removeChild(document.getElementById('resumeReviewIMG').lastChild);
+        }
+       
+    });
+
+    // function submit(){
+    //     var check = $('.main_left').find('input[type=checkbox]:checked').length;
+    //     if (check > 3){
+    //         confirm('You have chosen more than three candidates. Please only check three box.','ok')
+    //     }
+    //     else if (check < 3){
+    //         confirm('You must choose three candidates. Please pick more candidates.','ok')
+    //     }
+    //     else {
+    //         window.location.href = "version2interview.html";
+    //     }
+    // }
+
+    // function close1(){
+    //     $('#popWin').css('display','none')
+    //     $('#overlay2').css('display','none')
+    // }
+    </script>
+    
+</body>
+</html>

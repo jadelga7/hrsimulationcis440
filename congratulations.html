@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html> 
+    
+<head>
+    <title>Finished!</title>
+    <meta charset="utf-8">
+    <link href='https://fonts.googleapis.com/css?family=Mr Bedfort' rel='stylesheet'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="./mentee.js"></script>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            font-family: default;
+        }
+
+        body{
+            background: rgb(239, 244, 247);
+        }
+
+        #header{
+            width: 100%;
+            height: 60px;
+            background:rgb(33, 66, 99);
+            position: fixed;
+            top: 0;
+        }
+        /*主页面按钮*/
+        #header .dh_btn{
+            width: 100px;
+            height: 60px;
+            background:rgb(23, 50, 77);
+            float: left;
+            cursor: pointer;
+            line-height: 60px;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        #header .user_admin_btn{
+            width: calc(100% - 100px);
+            height: 60px;
+            background: rgb(33, 66, 99);
+            float: right;
+            text-align: right;
+            line-height: 60px;
+            font-size: 20px;
+        }
+
+        .mainContent{
+            position: fixed;
+            width: calc(100% - 60px);
+            margin-top: 60px;
+            color: #333300;
+            height: auto;
+            
+        }
+
+
+        #left_dh{
+            width: 0;
+            height: 100%;
+            background-color:rgb(41, 75, 109);
+            display: block;
+            position: fixed;
+            left: 0;
+            
+        }
+
+        #left_dh button{
+            font-size:3vh;
+        }
+
+        #black_bg{
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            background: rgb(182, 181, 181);
+            z-index: -999999;
+            display: none;
+        }
+        /*menu页面按键颜色*/
+        .menuButton {
+            width: 100%;
+            height: 20%;
+            font-size: 30px;
+            background:rgb(41, 75, 109);
+            color: white;
+            display: inline-block;
+            text-decoration: none;
+            border: none;
+            padding: 20px;
+        }
+
+        /*按钮变颜色*/
+        .menuButton:hover {
+            opacity: 0.8;
+            color:rgb(33, 66, 99);
+            background: white;
+        }
+
+        .main_left{
+        float: left;
+        margin: 0px;
+        height: 90vh;
+        padding: 24px;
+        overflow: scroll;
+        }
+
+        #rcorners {
+            border-radius: 5px;
+            background: rgb(114, 134, 155);
+            background-position: left top;
+            background-repeat: repeat;
+            padding: 20px;
+            width: 100%;
+            height: 100px;
+            color: white;
+            padding: 5px;
+            margin: auto;
+            
+        }
+
+        #start{
+            border-radius: 5px;
+            color: white;
+            font-style:bold;
+            background: rgb(74, 117, 160);
+            width: 20%;
+            height: 5%;
+        }
+
+        label{ display: block; }
+        input[type=submit]{ margin-top: 15px; }
+
+    </style>
+</head>
+<body bgcolor="#eee">
+
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title w-100 text-center" style="font-family: 'Mr Bedfort'; font-size: 5em;">Congratulations!</h4>
+                </div>
+                <div class="modal-body" style="font-size: 2.5vh;">
+                    <div class='main_left' style="width: 30%; height: 100%; overflow: hidden; margin: 0;">
+                        <img src="confetticannon.gif" height=150 width=150 alt="Celebratory Confetti Cannon">
+                    </div>
+
+                    <p>You've completed everything! You've successfully been able to identify how to make a job description, how to choose a 
+                        proper candidate, and how to interview.
+                        With proper training and motivation, you're able to be the best you you can be. 
+                        <br><br>Your mentor believed you could do it, and you did.
+                        <br><br>Now go out there and be the best YOU you could be!
+                    </p>
+
+                    <center><button type="button" class="btn btn-success" data-dismiss="modal" style="font-size: 3vh;">I will!</button></center>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 头部 -->
+    <div id="header">
+        <div class="dh_btn" onclick="openLeft_dh()" style="color: white;">Menu</div>
+        <div class="user_admin_btn" style="color: white; text-align: right;">
+        <p style="margin-right: 1%;"><a id="date"></a></p>
+    </div>
+    </div>
+
+
+    <div class="mainContent" id="totalMain">
+
+        <div class='main_left' style="border-right: 0.5px solid #e2e2e2; width: 30%;  padding-left: 3%; font-size: 2.6vh;">
+            <center>
+                Feel free to print your certificate<br>
+                <button class="btn btn-success btn-lg" onclick="window.print()">
+                    <span class="glyphicon glyphicon-print"></span> Print
+                </button>
+                <br><br>
+                <p>To discuss results or to ask more questions to your mentor, here's the link to your own designated meeting,
+                here's the link: <br>
+                <a href="https://us04web.zoom.us/j/79921791955" target="_blank" class="btn btn-primary btn-lg">Launch Meeting</a>
+                </p>
+                <br><br>
+                <p>
+                    <form>
+                        <label for="feedback" style="font-size: 3vh;">Feedback Review:</label>
+                        <p style="font-size: 2.3vh;">Now leave a review for how Zoe did on making the questions. List any improvements that could be made, or any comments in general.</p> <p style="font-size: 2vh;"><strong>Your opinion matters</strong></strong></p>
+                        <textarea id="feedbackBox" name="Fbreview" rows="6" cols="30" style="font-size: 1em;"></textarea>
+                          <br>
+                          <input type='submit' onclick='storeFeedback(document.getElementById("feedbackBox").value)' style='border-radius: 5px; font-size: 2vh; color: white; font-weight:bold; background: rgb(74, 117, 160); width: 20%; height: 5%;' value='Submit'/>
+                    </form>
+                </p>
+            </center>
+        </div>
+
+       
+        <div class='main_left' style=" width: 70%; ">
+            <iframe src="certificate.pdf" width="100%" height="100%"></iframe>
+        </div>
+
+
+    </div>
+    <!-- 左侧导航 -->
+    <div id="left_dh" style='font-size:3.5vh;'></div>
+
+    <!-- 半透明黑色背景 -->
+    <div id="black_bg" onclick="closeLeft_dh()"></div>
+
+<script>
+
+$(document).ready(function(){
+$("#myModal").modal('show');
+});
+
+n =  new Date();
+y = n.getFullYear();
+m = n.getMonth() + 1;
+d = n.getDate();
+document.getElementById("date").innerHTML = m + "/" + d + "/" + y;
+    
+    //Store feedback into localStorage
+    function storeFeedback(comment) {
+        var oldComment = localStorage.getItem("finalFeedback0");
+        localStorage.setItem(("finalFeedback0"), (comment + "\n" + oldComment));
+        
+    } //end of storeFeedback
+
+
+
+
+</script>
+
+
+
+</body>
+</html>

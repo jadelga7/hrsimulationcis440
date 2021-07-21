@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customize Question</title>
+    <meta charset="utf-8">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script src="./mentor.js"></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover">
+    <style>
+       *{
+    margin:0;
+    padding:0;
+}
+
+#header{
+    width: 100%;
+    height: 60px;
+    background:rgb(33, 66, 99);
+    position: fixed;
+    top: 0;
+}
+/*主页面按钮*/
+#header .dh_btn{
+    width: 100px;
+    height: 60px;
+    background:rgb(23, 50, 77);
+    float: left;
+    cursor: pointer;
+    line-height: 60px;
+    text-align: center;
+    font-size: 20px;
+}
+
+#header .user_admin_btn{
+    width: calc(100% - 100px);
+    height: 60px;
+    background: rgb(33, 66, 99);
+    float: right;
+    text-align: right;
+    line-height: 60px;
+    font-size: 20px;
+}
+
+.mainContent{
+    position: fixed;
+    width: calc(100% - 60px);
+    margin-top: 60px;
+    color: #333300;
+    width: 100%;
+    height: 100%;
+}
+
+
+#left_dh{
+    width: 0;
+    height: 100%;
+    background-color:rgb(41, 75, 109);
+    display: block;
+    position: fixed;
+    left: 0;
+    z-index: 9999;
+}
+
+#left_dh button{
+    font-size:3vh;
+}
+
+#black_bg{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: rgb(0, 0, 0);
+    opacity: 0.6;
+    z-index: 999;
+    display: none;
+}
+/*menu页面按键颜色*/
+.menuButton {
+    width: 100%;
+    height: 20%;
+    font-size: 30px;
+    background:rgb(41, 75, 109);
+    color: white;
+    display: inline-block;
+    text-decoration: none;
+    border: none;
+    padding: 20px;
+}
+
+/*按钮变颜色*/
+.menuButton:hover {
+    opacity: 0.8;
+    color:rgb(33, 66, 99);
+    background: white;
+}
+
+.main_left{
+    width: 90%;
+	height: 100%;
+    bottom: 0;
+    margin-top: 60px;
+	margin: auto;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+    background-color: white;
+}
+
+.main_left_main{
+    width: 95%;
+	height: 100%;
+	margin: auto;
+    margin-top: 20px;
+    border-radius: 5px;
+    font-style:bold;
+    border-width: 0.1px;
+    border-style: solid;
+    border-color: rgb(216, 216, 216);
+}
+
+.customizeMain{
+    border-radius: 2px;
+    background: rgb(130, 145, 160);
+    height: 100%;
+    width: 100%;
+}
+
+.main_left_main label{
+    margin: 2%;
+}
+
+.option{
+    width: 92%; 
+    height: 30px;  
+    margin-top: 0.5%;
+    margin-bottom: 1%;
+}
+
+#question{
+    border-radius: 5px;
+    color: white;
+    font-style:bold;
+    background: rgb(74, 117, 160);
+    width: 10%;
+    height: 20px;
+    margin-left: 20%;
+}
+
+#clear{
+    border-radius: 5px;
+    color: white;
+    font-style:bold;
+    background: rgb(74, 117, 160);
+    width: 10%;
+    height: 22px;
+    margin-left: 20%;
+}
+
+#cancel{
+    border-radius: 5px;
+    color: white;
+    font-style:bold;
+    background: rgb(74, 117, 160);
+    width: 10%;
+    height: 22px;
+    margin-left: 13%;
+}
+
+#question:hover {
+    opacity: 0.5;
+}
+    </style>
+</head>
+<body bgcolor="#eee">
+<!-- 头部 -->
+<div id="header">
+    <div class="dh_btn" onclick="openLeft_dh()" style="color: white;">Menu</div>
+    <div class="user_admin_btn" style="color: white; text-align: right;">
+      <p style="margin-right: 1%;"><a id="date"></a></p>
+  </div>
+</div>
+
+<div class="mainContent" id="totalMain">
+    <div class='main_left' >
+        <div>
+            <img src="./LOGO.png" style="width: 7%;  margin-top: 0;margin-right: 5%; float: left;">
+        </div>
+        <p style="float: none;">
+            <br>
+            <h1 style="text-align: left;">You can customize/add question(s) here.</h1>
+            <p>Note: This will not make changes right away. This will be sent to our developers who will program it into the system.<br>Turn around time can be from 2 to 7 days.</p> 
+            <br>  
+        </p>
+        <div class='main_left_main'>
+            
+            <div>
+                <input id="fixQ" placeholder="Type the new question In here." style="width: 96%; height: 60px; margin: 2%;">
+                <label>A.</label><input id="a" placeholder="Type the option In here." class="option" >
+                <label>B.</label><input id="b" placeholder="Type the option In here." class="option" >
+                <label>C.</label><input id="c" placeholder="Type the option In here." class="option" >
+                <label>D.</label><input id="d" placeholder="Type the option In here." class="option" style="margin-bottom: 25px;">
+            </div>
+            <hr style="border-width: 0.1px;border-style: solid;border-color: rgb(216, 216, 216); ">
+            <div style="margin-top: 1.5%;">
+                <label >Correct Option:</label> 
+                <select>
+                    <option>A.</option>
+                    <option>B.</option>
+                    <option>C.</option>
+                    <option>D.</option>
+                </select>
+                <input id="notes" placeholder="Type any notes for the programmers." style="width: 96%; height: 60px; margin: 2%;">
+            </div>
+            <div style="margin: auto;">
+                <a href="mentor.html"><button id="cancel">Cancel</button></a>
+                <button id="clear" onclick="clearBoxes()">Clear</button>
+                <button id="question" onclick="customize()">Save and Send</button>
+            </div>
+
+        </div>
+    </div>
+    <div class="customizeMain"></div>
+     
+
+</div>
+
+<!-- 左侧导航 -->
+<div id="left_dh"></div>
+
+<!-- 半透明黑色背景 -->
+<div id="black_bg" onclick="closeLeft_dh()"></div>
+
+<script>
+    n =  new Date();
+    y = n.getFullYear();
+    m = n.getMonth() + 1;
+    d = n.getDate();
+    document.getElementById("date").innerHTML = m + "/" + d + "/" + y;
+
+function clearBoxes() {
+    x = confirm('Are you sure you want to clear responses?');
+
+    if (x) {
+        document.getElementById('fixQ').value = "";
+        document.getElementById('a').value = "";
+        document.getElementById('b').value = "";
+        document.getElementById('c').value = "";
+        document.getElementById('d').value = "";
+        document.getElementById('notes').value = "";
+    }
+}
+    
+   
+</script>
+    
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./timer.js"></script>
+
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-size: 100%;
+  z-index: -1;
+  color:rgba(47, 41, 24);
+}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+img {
+  opacity: 0.1;
+}
+
+button {
+  background-color: rgb(41, 75, 109);
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 5px;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: rgba(47, 41, 24);
+  border-radius: 5px;
+}
+
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+.container {
+  padding: 16px;
+}
+
+.form {
+  background-color:white;
+  align-content: center;
+  width: 28%;
+  height: 75%;
+  margin: auto;
+  margin-top: 10%;
+  -moz-box-shadow: 10px 10px 10px rgba(0, 0, 0,0.3);
+  -webkit-box-shadow: 10px 10px 10px rgba(0, 0, 0, .3);
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, .3);
+  padding: 10px;
+  background: white;
+  border-radius: 25px;
+  padding: 1.5%;
+  background-color: rgb(251, 251, 251);
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .cancelbtn {
+     width: 100%;
+  }
+}
+</style>
+
+<script>
+    
+
+    console.log("loaded in");
+
+    localStorage.setItem("menteeUsername", "ning");
+    localStorage.setItem("menteePassword", "1234");
+    localStorage.setItem("mentorUsername", "zoe");
+    localStorage.setItem("mentorPassword", "password");
+
+    /*
+    var menteeInfo, mentorInfo, menteeJSON, mentorJSON;
+    //Storing the data, one JSON for mentor and one for mentee
+    menteeInfo = { username: "joe", password: "1234", progress: "0" }; 
+    mentorInfo = { username: "sally", password: "password"};
+    menteeJSON = JSON.stringify(menteeInfo);
+    mentorJSON = JSON.stringify(mentorInfo);
+    localStorage.setItem("localJSON", menteeJSON);
+    localStorage.setItem("localJSON", mentorJSON);
+    }
+    
+    
+    
+    Obsolete code for registering users, since we've decided not to do that
+    function registerUser() {
+        // Get the data
+        var text = localStorage.getItem("localJSON");
+        var obj = JSON.parse(text);
+        console.log(obj);
+    }
+    */
+
+ function onlyOne(position){
+    if (position == 'or'){
+      document.getElementById("mentee").checked = false;
+    }
+    else{
+      document.getElementById("mentor").checked = false;
+  }
+ }
+    function login() {
+
+        if ((document.getElementById("mentee").checked)) {
+            // if mentee username matches 
+            if (document.getElementById("userName").value == localStorage.getItem("menteeUsername")) {
+                // if mentee password matches
+                if (document.getElementById("passwordInput").value == localStorage.getItem("menteePassword")) {
+                    // startTimer()
+                    window.location.href = "menteeHomePage.html";
+                  // // this function starts recording the time and date mentee started
+
+                } else { alert("Invalid password") };
+            } else { alert("Invalid username or password") };
+
+        } else if ((document.getElementById("mentor").checked)) {
+            // if mentor username matches
+            if (document.getElementById("userName").value == localStorage.getItem("mentorUsername")) {
+                // if mentor password matches
+                if (document.getElementById("passwordInput").value == localStorage.getItem("mentorPassword")) {
+                    window.location.href = "mentorHomePage.html";
+                } else { alert("Invalid password") };
+            } else { alert("Invalid username or password") };
+        } //end of else if
+
+    } //end of function login
+
+</script>
+</head>
+<body>
+  
+  <form> <input type="button" value="&lt;" onclick="history.go(-1)"> </form>
+
+  <div class="form">
+  <h2>Login Form</h2>
+
+
+  <div>
+   
+  
+    <label for="uname" id="name"><b>Username</b></label>
+    <input id="userName" type="text" placeholder="Enter Username" name="username" required>
+
+    <label for="psw" id="psw"><b>Password</b></label>
+    <input id="passwordInput" type="password" placeholder="Enter Password" name="password" required>
+
+    <input type="checkbox" id="mentor" class="radio" style="margin-top: 2%;margin-left: 1%;" checked onclick="onlyOne('or')"><label for="mentor"> I'm a mentor</label>
+    <input type="checkbox" id="mentee" class="radio" style="margin-left: 10%;" onclick="onlyOne('ee')"><label for="mentee"> I'm a mentee</label>
+        
+    <button onclick="login()" type="submit">Login</button> 
+    <label>
+      <input type="checkbox" checked="checked" name="remember"> Remember me
+    </label>
+    <div class="container" style="margin-bottom: 20px;">
+      <span class="psw" >Forgot <a href="#" onclick="alert('We have sent an email to your company. You will get your password and username from the company soon.');">password?</a></span>
+
+    
+</div>
+</body>
+</html>

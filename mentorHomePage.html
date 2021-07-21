@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<!-- This is the page AFTER you sign into the simulation. This is what MENTORS sees. -->
+
+  <title>HR Simulation – Mentor</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="style.css" rel="stylesheet" type="text/css"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="./timer.js"></script>
+
+</head>
+
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light">
+  <div class="container-fluid">
+
+    <div class="col-sm-12">
+        <h6 style="text-align: right;">
+            <a class="btn btn-primary" role="button" onclick="signOut()">SIGN OUT</a>
+        </h6>
+    </div>
+    
+
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="home.html"><img src='LOGOoneline.png' height='30px'></a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+        <li class="active"><a href="home.html">Home</a></li>
+     
+        <li><a href="companiesPage.html">Companies</a></li>
+        <li><a href="feedback.html">Feedback</a></li>
+        <form class="navbar-form navbar-left" action="/action_page.php">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search">
+              <div class="input-group-btn">
+                <button class="btn btn-default" type="submit">
+                  <i class="glyphicon glyphicon-search"></i>
+                </button>
+            </ul>
+    </div>
+  </div>
+</nav>
+
+
+<div class="jumbotron" style="background-image: url(mentorHome.jpg); background-size: cover; padding: 20px;">
+  <div class="container text-center" style="height: 550px;">
+    <div class="col-sm-3"></div> 
+      <div class="col-sm-6" style="background: white;
+      border: 2px solid grey; box-shadow: 2px 2px 2px 2px rgba(128, 128, 128, 0.383);">
+                <h3 style="font-size: 35px; text-decoration: underline;">Before Starting:</h3>
+                <h4 style="font-size: 23px;">For the Mentors</h4>
+                <p style="font-size: 17px;">Your given company has given you an apprentice because you are well experienced and trusted. 
+                  The idea is that you have one, and one only. Build that relationship by helping them. Don't leave them in the dust, 
+                  because if you do, it could effect the future of the company and your personal experience overall. Remember, the butterfly effect is a real thing.  
+                  Don't forget your ability to view all the questions you provided, edit, add, and delete them.</p>
+                  <hr> 
+                  <h4>What they see:</h4>  <br> 
+                  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#companyHandbook">Company Handbook</button>  
+                  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalInstructions">Their Instructions</button> 
+                  <hr>
+                    <a class="btn btn-success btn-lg" href="mentor.html" role="button">Enter Simulation</a><br><br>
+
+
+    </div>
+    <div class="col-sm-3"></div>
+      
+      <div id="companyHandbook" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Ralpha Marketing Inc. LLC</h4>
+            </div>
+            <div class="modal-body">
+              <p>Company Website: <a href="#" target="_blank">ralphamarketing.com</a></p>
+              <p>Mission Statement: "Our mission is to make everyone else 
+                look bad by pointing out their mistakes and flaws so 
+                that we look better.</p>
+              <p><a href="ralphahandbook.pdf" target="_blank">RalphaMarketingHandbook.pdf</a></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+            </div>
+        
+        </div>
+        </div>
+
+        <div id="modalInstructions" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Instructions</h4>
+            </div>
+            <div class="modal-body">
+              <p><h4>Part 1</h4>Create a job description by chosing the phrases that best fit the description.</p>
+              <p><h4>Part 2</h4>Look through a list of resumes and chosing the best candidate to possible interview</p>
+              <p><h4>Part 3</h4>Practice interviewing candidates and choosing the right one to hire based on their responses.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+            </div>
+        
+        </div>
+        </div>
+
+      <br><br>
+
+                    
+    </div>
+  
+  </div>
+</div>
+
+
+  
+
+<br>
+<footer class="container-fluid text-center" style="background-color: #5d5d5fb4;">
+    <div class="footer">
+        <div class="row">
+            <div class="col-sm-4">
+                <b>Contact</b>
+                <p> 1234 Internet Street 
+                    <br> 5th Floor 
+                    <br> Tempe, AZ 85281 
+                    <br> <a href="mailto:procrasti_nation@business.com" style="color: white;">procrasti_nation@business.com</a>
+                    <br> (555)-213-5757 
+                </p>
+            </div>
+            <div class="col-sm-4">
+                <b>Social Media</b>
+                <p>
+                <a href="#" class="fa fa-facebook"></a>
+                <a href="#" class="fa fa-twitter"></a> 
+                <a href="#" class="fa fa-linkedin"></a>
+                <a href="#" class="fa fa-youtube"></a>
+                <a href="#" class="fa fa-instagram"></a>
+                </p>
+            </div>
+            <div class="col-sm-4">
+                <a href="#" style="color: white;">Private Policy</a> <br> 
+                <a href="#" style="color: white;">Terms of Use</a></div>
+          </div>
+
+          <div class="col-sm-12">© 2020 Procrasti-Nation LLC. All Rights Reserved</div>
+
+    </div>
+</footer>
+
+<script>
+  function signOut() {
+    x = confirm("Are you sure you want to sign out?");
+
+    if (x == true) 
+    window.location.href = "home.html";
+  }
+
+</script>
+
+</body>
+</html>
