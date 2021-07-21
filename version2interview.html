@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>interview page</title>
+    <meta charset="utf-8">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script src="./mentor.js"></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js">
+        // <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <style>
+       *{
+    margin:0;
+    padding:0;
+}
+
+body{
+    background: rgb(239, 244, 247);
+    overflow: auto;
+}
+
+#header{
+    width: 100%;
+    height: 60px;
+    background:rgb(33, 66, 99);
+    position: fixed;
+    top: 0;
+}
+/*主页面按钮*/
+#header .dh_btn{
+    width: 100px;
+    height: 60px;
+    background:rgb(23, 50, 77);
+    float: left;
+    cursor: pointer;
+    line-height: 60px;
+    text-align: center;
+    font-size: 20px;
+}
+
+#header .user_admin_btn{
+    width: calc(100% - 100px);
+    height: 60px;
+    background: rgb(33, 66, 99);
+    float: right;
+    text-align: right;
+    line-height: 60px;
+    font-size: 20px;
+}
+
+.mainContent{
+    position: fixed;
+    width: calc(100% - 60px);
+    margin-top: 60px;
+    color: #333300;
+    z-index: 1;
+    
+}
+
+
+#left_dh{
+    width: 0;
+    height: 100%;
+    background-color:rgb(41, 75, 109);
+    display: block;
+    position: fixed;
+    left: 0;
+    z-index: 9999;
+}
+
+#left_dh button{
+    font-size:3vh;
+}
+
+#black_bg{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: rgb(0, 0, 0);
+    opacity: 0.6;
+    z-index: 999;
+    display: none;
+}
+/*menu页面按键颜色*/
+.menuButton {
+    width: 100%;
+    height: 20%;
+    font-size: 30px;
+    background:rgb(41, 75, 109);
+    color: white;
+    display: inline-block;
+    text-decoration: none;
+    border: none;
+    padding: 20px;
+}
+
+/*按钮变颜色*/
+.menuButton:hover {
+    opacity: 0.8;
+    color:rgb(33, 66, 99);
+    background: white;
+}
+
+.main_left{
+  float: left;
+  margin: 0px;
+  height: 660px;
+  padding: 24px;
+  overflow-y: scroll;
+}
+
+.main_left_main{
+  float: left;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+
+
+.modal-content{
+    z-index: 100;
+    width: 35%;
+    margin-left: 32%;
+    margin-top: 20px;
+    position: absolute;
+    
+}
+
+#overlay2 {
+    background: rgb(0, 0, 0);
+    opacity: 0.7; /* 透明度 */
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99; 
+    overflow: hidden;
+}
+
+select{
+    width: 80%;
+}
+
+
+    </style>
+</head>
+<body bgcolor="#eee" >
+<!-- 头部 -->
+
+<div id="overlay2">
+</div> 
+<div class="modal-content" id="popWin">
+    <div class="modal-header">
+        <h4 class="modal-title" style="text-align: center;">You are reaching to the second part.</h4>
+        <button type="button" class="close" data-dismiss="modal" onclick="close1()">×</button>
+    </div>
+    <div class="modal-body">
+        <center>
+            <p style="font-size: 1em;">Your boss has asked you to pick three candidate
+                from seven. Now you are access to all the seven resume. <br>Make your choose.</p>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="close1()">Ok</button>
+        </center>
+    </div>
+</div>
+
+
+<div id="header">
+    <div class="dh_btn" onclick="openLeft_dh()" style="color: white;">Menu</div>
+    <div class="user_admin_btn" style="color: white; text-align: right;">
+      <p style="margin-right: 1%;"><a id="userName">UserName</a> <a id="date"></a></p>
+  </div>
+</div>
+
+<div class="mainContent" id="totalMain">
+    <div class='main_left' style=" width: 20%; border: 0.5px solid #e2e2e2; padding: 2%;">
+      <p style="font-size: 18px;">Part 3</p>
+  
+      <p  style="font-size: 18px;"> You've chosen a job description, and picked the best 3 resumes. 
+        Now it's time to interview those 3 candidates. Select the questions in the dropdowns below 
+        to see how each candidate replies to your questions. When you have finished deciding, 
+        pick the candidate you want to hire in the last question.
+    </p>
+
+     
+</div>
+
+
+  <div class='main_left' style=" width: 60%;  padding-left: 3%;font-size: 3vh;">
+    <h3>Job Interviews</h3>
+    <br>
+    <h5>Candidate 1:</h5>
+<select id="selectQuestion1" onchange = getResponse1()>
+	<option>Choose a Question</option>
+	<option >1. Tell me about yourself.</option>
+	<option >2. Why are you interested in this position?</option>
+	<option >3. Why are you leaving your current job?</option>
+	<option >4. Can you describe a work or school instance in which you messed up?</option>
+	<option >5. Tell me about a time when you experienced conflict with a co-worker and how you dealt with it.</option>
+	<option >6. What do you know about our company?</option>
+	<option >7. How would you improve our current product or service?</option>
+	<option >8. What questions do you have for me?</option>
+</select><br>
+<p>Response:</p>
+<p id="answers1"></p><br>
+
+	<h5>Candidate 2:</h5>
+<select id="selectQuestion2" onchange=getResponse2()>
+	<option>Choose a Question</option>
+	<option>1. Tell me about yourself.</option>
+	<option>2. Why are you interested in this position?</option>
+	<option>3. Why are you leaving your current job?</option>
+	<option>4. Can you describe a work or school instance in which you messed up?</option>
+	<option>5. Tell me about a time when you experienced conflict with a co-worker and how you dealt with it.</option>
+	<option>6. What do you know about our company?</option>
+	<option>7. How would you improve our current product or service?</option>
+	<option>8. What questions do you have for me?</option>
+</select><br>
+<p>Response:</p>
+<p id="answers2"></p><br>
+
+	<h5>Candidate 3:</h5>
+<select id="selectQuestion3" onchange=getResponse3()>
+	<option>Choose a Question</option>
+	<option>1. Tell me about yourself.</option>
+	<option>2. Why are you interested in this position?</option>
+	<option>3. Why are you leaving your current job?</option>
+	<option>4. Can you describe a work or school instance in which you messed up?</option>
+	<option>5. Tell me about a time when you experienced conflict with a co-worker and how you dealt with it.</option>
+	<option>6. What do you know about our company?</option>
+	<option>7. How would you improve our current product or service?</option>
+	<option>8. What questions do you have for me?</option>
+</select><br>
+<p>Response:</p>
+<p id="answers3"></p><br>
+
+
+       
+    </div>
+
+  <div class='main_left' style=" width: 20%;  padding-left: 3%; border-left: 0.5px solid #e6e6e6; padding: 2%;">
+    <h5>Choose a Candidate to hire:</h5>
+    <br>
+    <input type="radio" id="c1" name="candidate" value="Candidate 1" >
+    <label for="candidate">Candidate 1</label><br>
+    <input type="radio" id="c2" name="candidate" value="Candidate 2" >
+    <label for="candidate">Candidate 2</label><br>
+    <input type="radio" id="c3" name="candidate" value="Candidate 3" >
+    <label for="candidate">Candidate 3</label>
+    <br>
+    <br>
+          <button type="button" onclick="getResponse4()"> 
+                Submit 
+            </button> <br><br>
+    <p id="output"> </p>
+        
+  </div>
+  
+
+</div>
+
+
+<div id="left_dh"></div>
+
+
+<div id="black_bg" onclick="closeLeft_dh()"></div>
+<script>
+    n =  new Date();
+    y = n.getFullYear();
+    m = n.getMonth() + 1;
+    d = n.getDate();
+    document.getElementById("date").innerHTML = m + "/" + d + "/" + y;
+
+
+
+    function close1(){
+        $('#popWin').css('display','none')
+        $('#overlay2').css('display','none')
+    }
+    function getResponse1() {
+  var questionBox1 = document.getElementById("selectQuestion1");
+  var answerBox1 = document.getElementById("answers1")
+	switch (questionBox1.value) {
+    	case "1. Tell me about yourself.": 
+    	answerBox1.innerHTML  = "I love video games, beer and my girlfriend even though she’s really annoying"; break; 
+    	case "2. Why are you interested in this position?": 
+    	answerBox1.innerHTML  = "I needed money, you know?"; break; 
+    	case "3. Why are you leaving your current job?":  
+    			answerBox1.innerHTML = "I hate my manager, she’s the worst person I know and I need to get out of there, man!"; break; 
+    	case "4. Can you describe a work or school instance in which you messed up?":  
+    			answerBox1.innerHTML = "Just pick one? I messed up all the time, it sucked. "; break; 
+    	case "5. Tell me about a time when you experienced conflict with a co-worker and how you dealt with it.":  
+    	answerBox1.innerHTML = "Like I said, I really hated my last manager, and I’m dealing with it by finding this new job."; break; 
+    	case "6. What do you know about our company?":  
+    	answerBox1.innerHTML = "Not much really."; break; 
+    	case "7. How would you improve our current product or service?":  
+    	answerBox1.innerHTML = "I know how to do projects so I could do yours. "; break; 
+    	case "8. What questions do you have for me?":  
+    	answerBox1.innerHTML = " Nothing, just call me if you have an offer!"; break;
+        default:  answerBox1.innerHTML = "";  break;
+
+     }
+    }
+
+function getResponse2() {
+  var questionBox2 = document.getElementById("selectQuestion2");
+  var answerBox2 = document.getElementById("answers2")
+	switch (questionBox2.value) {
+    	case "1. Tell me about yourself.": 
+    	answerBox2.innerHTML  = "I like to travel, gotta spend all those vacation days!"; break; 
+    	case "2. Why are you interested in this position?": 
+    	answerBox2.innerHTML  = "I’m good at programming so I think I can do a good job on your team."; break; 
+    	case "3. Why are you leaving your current job?":  
+    			answerBox2.innerHTML = " I liked the company but didn’t get along with my coworkers, and I wasn’t getting paid enough. "; break; 
+    	case "4. Can you describe a work or school instance in which you messed up?":  
+    		answerBox2.innerHTML = "Once I missed a project deadline and failed a class as the result. I never want to do that again!"; break; 
+    	case "5. Tell me about a time when you experienced conflict with a co-worker and how you dealt with it.":  
+    			answerBox2.innerHTML = "I once had an issue with my coworker, so I reported her to HR and they resolved it."; break; 
+    	case "6. What do you know about our company?":  
+    			answerBox2.innerHTML = "I read your job description."; break; 
+    	case "7. How would you improve our current product or service?":  
+    			answerBox2.innerHTML = "I’m great at doing projects, probably the best team member on any team."; break; 
+    	case "8. What questions do you have for me?":  
+    			answerBox2.innerHTML = "What are the bosses like here?"; break;
+        default:  answerBox2.innerHTML = "";  break;
+
+     }
+    }
+
+  function getResponse3() {
+  var questionBox3 = document.getElementById("selectQuestion3");
+  var answerBox3 = document.getElementById("answers3")
+	switch (questionBox3.value) {
+    	case "1. Tell me about yourself.": 
+    			answerBox3.innerHTML = "I am graduating college this year, I play sports and love music. "; break; 
+    	case "2. Why are you interested in this position?": 
+    			answerBox3.innerHTML  = "I love the company’s vision and mission, and I’m confident that with the programming skills I bring to the table, I’ll be able to add a lot of value to what your team creates."; break; 
+    	case "3. Why are you leaving your current job?":  
+    			answerBox3.innerHTML = " I enjoyed working for my last employer but there weren’t very many opportunities for growth in my career, which is important to me."; break; 
+    	case "4. Can you describe a work or school instance in which you messed up?":  
+    			answerBox3.innerHTML = " I made a coding mistake on a project that cost my group some time, so I cleared out my schedule and did extra work until the deadline to finish the project on time and make up for my mistake."; break; 
+    	case "5. Tell me about a time when you experienced conflict with a co-worker and how you dealt with it.":  
+    			answerBox3.innerHTML = " In my last job, I had a coworker that I felt unfairly judged my contributions to every project. I talked to them individually about why they felt I wasn’t contributing enough, and they said they were unaware of how their comments affected me and that they would be less negative in the future."; break; 
+    	case "6. What do you know about our company?":  
+    			answerBox3.innerHTML = "I really like your company’s mission, and I reached out to a few current project developers, who said they really like the company’s culture, so I feel like I would really enjoy working here."; break; 
+    	case "7. How would you improve our current product or service?":  
+    			answerBox3.innerHTML = "I know that your projects usually focus on functionality and style, and I feel like my unique talents, creativity, and previous work experience could really help add to the style of what you create here at this company."; break; 
+    	case "8. What questions do you have for me?": 
+    			answerBox3.innerHTML = "What drew you to this company? Is the work-life balance what you expected? Does the leadership emphasize ethics? "; break;
+        default:  answerBox3.innerHTML = "";  break;
+
+     }
+    }
+      function getResponse4() {
+  
+             if(document.getElementById('c1').checked) { 
+                 document.getElementById("output").innerHTML 
+                    = "Wrong answer. Sorry, this was not a good candidate."; 
+            } 
+            
+            else if(document.getElementById('c2').checked) { 
+                document.getElementById("output").innerHTML 
+                    ="Wrong answer. This wasn't the worst candidate but you could have picked better";   
+            } 
+            else if(document.getElementById('c3').checked) { 
+                document.getElementById("output").innerHTML  
+                    = "Right answer! This was the best candidate.";   
+            } 
+            else{
+            	document.getElementById("output").innerHTML  = "Please choose a candidate and try again."
+            }
+            } 
+    </script>
+    
+</body>
+</html>
